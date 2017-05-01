@@ -5,62 +5,35 @@ import styles from './Styles/CustomNavBarStyles'
 import SearchBar from '../Components/SearchBar'
 import { connect } from 'react-redux'
 import { Metrics, Images } from '../Themes'
-import SearchActions from '../Redux/SearchRedux'
 
 class CustomNavBar extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      showSearchBar: false
-    }
+    this.state = {}
   }
 
-  showSearchBar = () => {
-    this.setState({showSearchBar: true})
-  }
-
-  cancelSearch = () => {
-    this.setState({showSearchBar: false})
-    this.props.cancelSearch()
-  }
-
-  onSearch = (searchTerm) => {
-    this.props.performSearch(searchTerm)
-  }
 
   renderMiddle () {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    if (this.state.showSearchBar) {
-      return <SearchBar onSearch={this.props.performSearch} searchTerm={this.props.searchTerm} onCancel={this.cancelSearch} />
-    } else {
-      return (
-        <Image resizeMode='cover' style={styles.logo} source={Images.clearLogo} />
-      )
-    }
+    return (
+      <Image resizeMode='cover' style={styles.logo} source={Images.clearLogo} />
+    )
   }
 
   renderRightButtons () {
-    if (this.state.showSearchBar) {
-      return <View style={{width: Metrics.icons.medium}} />
-    } else {
-      return (
-        <View style={styles.rightButtons}>
-          {NavItems.searchButton(this.showSearchBar)}
-        </View>
-      )
-    }
+    return (
+      <View style={styles.rightButtons}>
+        {NavItems.searchButton(this.showSearchBar)}
+      </View>
+    )
   }
 
   renderLeftButtons () {
-    if (this.state.showSearchBar) {
-      return null
-    } else {
-      return (
-        <View style={styles.leftButtons}>
-          {NavItems.backButton()}
-        </View>
-      )
-    }
+    return (
+      <View style={styles.leftButtons}>
+        {NavItems.backButton()}
+      </View>
+    )
   }
 
   render () {
@@ -100,10 +73,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    performSearch: (searchTerm) => dispatch(SearchActions.search(searchTerm)),
-    cancelSearch: () => dispatch(SearchActions.cancelSearch())
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomNavBar)

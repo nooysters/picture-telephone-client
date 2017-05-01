@@ -1,9 +1,10 @@
 import React from 'react'
 import { ScrollView, Button, Image, View, Alert, Text, ART } from 'react-native'
 import { Images } from '../Themes'
-import NavItems from '../Navigation/NavItems'
+import { Actions as NavigationActions } from 'react-native-router-flux'
+
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/DrawingViewStyles'
 import Draw from '../Components/Draw'
 
 const {
@@ -12,19 +13,16 @@ const {
   Shape,
 } = ART
 
-const d = []
+var d = []
+
 
 export default class CreateGameScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { d: '', height: 500, width: 500 }
+    this.state = { d: '', height: 500, width: 500, paths: [] }
   }
 
   setPosition = (event) => {
-    if(d.length === 0) {
-      d.push(`M${event.nativeEvent.pageX}, ${event.nativeEvent.pageY}`)
-    }
-
     d.push(`${event.nativeEvent.pageX}, ${event.nativeEvent.pageY}`)
     const path = d.join(' ')
 
@@ -35,6 +33,11 @@ export default class CreateGameScreen extends React.Component {
     })
   }
 
+  _clearAll = () => {
+    this.setState({...this.state, d: ''})
+    d = []
+  }
+
   _onStartShouldSetResponder = (e) => {
     this.dragging = true;
     //Setup initial drag coordinates
@@ -42,6 +45,9 @@ export default class CreateGameScreen extends React.Component {
       x: e.nativeEvent.pageX,
       y: e.nativeEvent.pageY
     }
+
+    d.push(`M${e.nativeEvent.pageX}, ${e.nativeEvent.pageY}`)
+    
     return true;
   }
 
@@ -52,8 +58,12 @@ export default class CreateGameScreen extends React.Component {
 
   render () {
     return (
-      <View style={styles.MainContainer} >
-        <View style={ styles.MainContainer } 
+      <View style={{
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        flex: 1
+      }} >
+        <View style={ styles.container }
           onResponderMove={ this.setPosition }
           onStartShouldSetResponder={this._onStartShouldSetResponder}
           onLayout={(event) => {
@@ -61,9 +71,10 @@ export default class CreateGameScreen extends React.Component {
           }}
         >
           { Draw(this.state.d, this.state.width, this.state.height) }
-        
         </View>
-
+        <View style={styles.buttonBar}>
+          <Button title="Clear" onPress={this._clearAll} color="#000" />
+        </View>
       </View>
     )
   }
