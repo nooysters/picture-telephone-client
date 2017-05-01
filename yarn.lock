@@ -4506,6 +4506,10 @@ react-native-animatable@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.1.1.tgz#00ddc72985f62f62a11a505abb1a06e77a92cd8a"
 
+react-native-art@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-art/-/react-native-art-1.0.0.tgz#bf33c874878edc1f0a096ad50e45905c128bd8cc"
+
 react-native-config@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.3.1.tgz#981d98eee2c4e467397cd9306f5b6958c501c6e8"
@@ -4546,6 +4550,10 @@ react-native-experimental-navigation@0.26.x:
     clamp "^1.0.1"
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
+
+react-native-fbsdk@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.5.0.tgz#3ccd67d189755df11d366b8de9acb91ea2300e6e"
 
 react-native-mock@^0.3.1:
   version "0.3.1"
